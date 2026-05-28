@@ -1,64 +1,22 @@
-const typing = document.querySelector(".typing")
+let images = [
+  {src: "https://images.unsplash.com/photo-1717964134799-a98f497172a5?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", text: "Beautiful Nature View"},
+  {src: "https://images.unsplash.com/photo-1634712901426-5f7a7443c703?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", text: "Peaceful Mountains"},
+  {src: "https://images.unsplash.com/photo-1757852058331-742b60863dd8?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", text: "Golden Sunset"},
+  {src: "https://plus.unsplash.com/premium_photo-1723532544658-306b119dd467?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", text: "Calm Ocean Waves"}
+];
 
-const words = [
-    "Graphic Designer",
-    "Frontend Developer",
-    "Video editing",
-    
-]
+let index = 0;
 
-let wordIndex = 0
-let charIndex = 0
-
-function typeEffect(){
-
-    if(charIndex < words[wordIndex].length){
-
-        typing.textContent += words[wordIndex].charAt(charIndex)
-
-        charIndex++
-
-        setTimeout(typeEffect,100)
-
-    }
-
-    else{
-
-        setTimeout(eraseEffect,1500)
-
-    }
-
+function show() {
+  document.getElementById("img").src = images[index].src;
+  document.getElementById("caption").innerText = images[index].text;
 }
 
-function eraseEffect(){
+function changeImage(step) {
+  index += step;
 
-    if(charIndex > 0){
+  if (index >= images.length) index = 0;
+  if (index < 0) index = images.length - 1;
 
-        typing.textContent = words[wordIndex].substring(0,charIndex-1)
-
-        charIndex--
-
-        setTimeout(eraseEffect,50)
-
-    }
-
-    else{
-
-        wordIndex++
-
-        if(wordIndex >= words.length){
-
-            wordIndex = 0
-
-        }
-
-        setTimeout(typeEffect,300)
-
-    }
-
-}
-
-window.onload = typeEffect
-function showMenu(){
-    document.querySelector("nav").classList.toggle("active");
+  show();
 }
